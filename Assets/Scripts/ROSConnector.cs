@@ -5,6 +5,8 @@ using Cysharp.Threading.Tasks;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Sensor;
 using RosMessageTypes.Moveit;
+using UnityEngine.UI;
+using TMPro;
 
 public class ROSConnector : MonoBehaviour
 {
@@ -24,11 +26,35 @@ public class ROSConnector : MonoBehaviour
     public delegate void GetRobotTrajectoryMsgDelegate(RobotTrajectoryMsg robotTrajectoryMsg);
     public static event GetRobotTrajectoryMsgDelegate onRobotTrajectoryMsgReceived;
 
+    // ------------ UI ------------
+    [SerializeField] TextMeshProUGUI connectionText;
+
     void Start()
     {
         JointStatePublisher.OnJointStateUpdated += Publish;
 
         ConnectToServer().Forget();
+    }
+
+    void Update()
+    {
+        if(client.Connected)
+        {
+            connectionText.text = "TCP : <color=green>Connected!</color>";
+        }
+        else
+        {
+            connectionText.text = "TCP : <color=red>Disconnected...</color>";
+            Reconnect();
+        }
+    }
+
+    public void Reconnect()
+    {
+        if(!client.Connected)
+        {
+            ConnectToServer().Forget();
+        }
     }
 
     async UniTaskVoid ConnectToServer()
@@ -42,7 +68,7 @@ public class ROSConnector : MonoBehaviour
         }
         catch(Exception ex)
         {
-            Debug.Log(ex.Message + "\nMake sure you are running the Qt application");
+            //Debug.Log(ex.Message + "\nMake sure you are running the Qt application");
             return;
         }
 
