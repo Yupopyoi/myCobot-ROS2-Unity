@@ -1,6 +1,6 @@
 # myCobot-ROS2-Unity
 
-![SampleImage](./Assets/Maretials/Image/UnityDisplaySample.png)
+![SampleImage](https://github.com/Yupopyoi/myCobot-ROS2-Unity/blob/main/Assets/Materials/Image/UnityDisplaySample.png)
 
 ## Development Environment
 
