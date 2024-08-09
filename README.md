@@ -16,7 +16,7 @@ URDF Importer
 ## How to Use
 
 Just press the play button.  
-TCP connections are established automatically.  
+TCP connection is established automatically.  
 
 Note : It requires [another application](https://github.com/Yupopyoi/ROS2-Qt-Unity) created with Qt.  
 
